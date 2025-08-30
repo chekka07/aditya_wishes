@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations on Your Baby Girl! 👶💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffe0f0 0%, #ffb6e6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff4589;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease;
+        }
+
+        .message {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease forwards;
+            transform: translateY(20px);
+            opacity: 0;
+            animation-delay: 0.5s;
+            border: 3px solid #ffb6e6;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: #ff4589;
+            font-weight: bold;
+        }
+
+        .stork {
+            max-width: 150px;
+            margin: 1rem auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background-color: #ff9ac6;
+            border-radius: 50%;
+            animation: floatBalloon 15s linear infinite;
+            z-index: -1;
+        }
+
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 50px;
+            background-color: #eee;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 10s linear infinite;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 18px;
+            color: #ffde59;
+            animation: twinkle 4s linear infinite;
+            z-index: -1;
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .baby-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .baby-img:hover {
+            transform: scale(1.1);
+        }
+
+        button {
+            background: linear-gradient(to right, #ff4589, #ff85b3);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(255, 107, 157, 0.4);
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatBalloon {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #confetti-pile {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 0;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            transition: all 0.3s ease-out;
+        }
+
+        @keyframes fallToCenter {
+            0% {
+                transform: translate(0, -20px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(var(--endX), calc(100vh - 20px)) rotate(360deg);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                padding: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .baby-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .baby-img {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="confetti"></div>
+    <div id="confetti-pile"></div>
+
+    <div class="container">
+        <h1>✨ Congratulations on Your Beautiful Baby Girl! 👶💕✨</h1>
+
+        <div class="message">
+            <p>🎀 Welcome to the world, precious little one! 👶👑</p>
+            <p>🎉 Congratulations to <span class="highlight">Aditya Chekravttula</span>, the proud father, on the
+                arrival of your <span class="highlight">beautiful baby girl</span>! 🥳</p>
+            <p>💫 May your daughter's life be filled with love, laughter, and endless possibilities. Wishing your family
+                joy, health, and many wonderful memories to come. 💖</p>
+            <p>👨‍👩‍👧 Enjoy every precious moment of this amazing journey of parenthood! 🍼🧸</p>
+        </div>
+
+        <div class="image-gallery">
+            <img src="https://cdn-icons-png.flaticon.com/512/2302/2302225.png" alt="Stork with baby" class="stork">
+            <img src="https://img.freepik.com/free-vector/cute-baby-girl-flat-design_23-2147656535.jpg"
+                alt="Baby girl illustration" class="baby-img">
+            <img src="https://img.freepik.com/free-vector/cute-baby-elements_23-2147546352.jpg" alt="Baby elements"
+                class="baby-img">
+        </div>
+
+        <svg width="100" height="100" viewBox="0 0 100 100" style="margin: 20px auto; display: block;">
+            <path d="M50,30 C55,20 65,20 70,25 C75,30 75,40 70,45 L50,70 L30,45 C25,40 25,30 30,25 C35,20 45,20 50,30 Z"
+                fill="#ff4589" stroke="#fff" stroke-width="2">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
+            </path>
+        </svg>
+
+        <button id="celebrateBtn">🎉 Celebrate! 🎊</button>
+    </div>
+
+    <script>
+        // Existing code...
+
+        // Create falling baby items animation
+        function createFallingBabyItems() {
+            const confettiContainer = document.getElementById('confetti');
+            const babyItems = ['👶', '🍼', '🧸', '👑', '🎀', '👣', '🌈'];
+
+            for (let i = 0; i < 50; i++) {
+                const item = document.createElement('div');
+                item.className = 'confetti-piece';
+                item.style.background = 'none';
+                item.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                item.innerHTML = babyItems[Math.floor(Math.random() * babyItems.length)];
+                item.style.width = 'auto';
+                item.style.height = 'auto';
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.top = '-20px';
+
+                const duration = Math.random() * 2 + 2;
+                const endX = (Math.random() - 0.5) * 200;
+                item.style.setProperty('--endX', endX + 'px');
+                item.style.animation = `fallToCenter ${duration}s forwards`;
+
+                confettiContainer.appendChild(item);
+
+                setTimeout(() => {
+                    item.remove();
+                }, duration * 1000);
+            }
+        }
+
+        // Create falling hearts and stars
+        function createFallingLoveSymbols() {
+            const confettiContainer = document.getElementById('confetti');
+            const loveSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝', '✨', '⭐', '🌟'];
+
+            for (let i = 0; i < 50; i++) {
+                const item = document.createElement('div');
+                item.className = 'confetti-piece';
+                item.style.background = 'none';
+                item.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                item.innerHTML = loveSymbols[Math.floor(Math.random() * loveSymbols.length)];
+                item.style.width = 'auto';
+                item.style.height = 'auto';
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.top = '-20px';
+
+                const duration = Math.random() * 2 + 2;
+                const endX = (Math.random() - 0.5) * 200;
+                item.style.setProperty('--endX', endX + 'px');
+                item.style.animation = `fallToCenter ${duration}s forwards`;
+
+                confettiContainer.appendChild(item);
+
+                setTimeout(() => {
+                    item.remove();
+                }, duration * 1000);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createBalloons();
+            createHearts();
+            createStars();
+
+            // Add click events to images
+            document.querySelectorAll('.baby-img').forEach(img => {
+                img.addEventListener('click', () => {
+                    createFallingBabyItems();
+                    img.style.animation = 'pulse 0.5s';
+                    setTimeout(() => img.style.animation = '', 500);
+                });
+            });
+
+            // Add click event to stork image
+            document.querySelector('.stork').addEventListener('click', () => {
+                createFallingBabyItems();
+                const stork = document.querySelector('.stork');
+                stork.style.animation = 'float 1s ease-in-out';
+                setTimeout(() => stork.style.animation = 'float 6s ease-in-out infinite', 1000);
+            });
+
+            // Add click event to heart SVG
+            document.querySelector('svg').addEventListener('click', () => {
+                createFallingLoveSymbols();
+                const heart = document.querySelector('svg path');
+                heart.setAttribute('fill', '#ff85b3');
+                setTimeout(() => heart.setAttribute('fill', '#ff4589'), 500);
+            });
+
+            // Add button event listener
+            document.getElementById('celebrateBtn').addEventListener('click', () => {
+                createConfetti();
+
+                // Play celebration sound
+                const audio = new Audio('https://freesound.org/data/previews/202/202029_2644491-lq.mp3');
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log('Audio playback failed:', e));
+            });
+        });
+    </script>
+    
+    
+
+
+    <script>
+        // Create floating balloons
+        function createBalloons() {
+            const colors = ['#ff9ac6', '#ffb6d9', '#ffd0e6', '#ff6b9d', '#ff85b3', '#ff4589'];
+
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(balloon);
+            }
+        }
+
+        // Create floating hearts
+        function createHearts() {
+            const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 8 + 7) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                document.body.appendChild(heart);
+            }
+        }
+
+        // Create stars
+        function createStars() {
+            const starEmojis = ['⭐', '✨', '🌟'];
+
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDuration = (Math.random() * 4 + 2) + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const confettiPile = document.getElementById('confetti-pile');
+            const colors = ['#ff9ac6', '#ffb6d9', '#ffd0e6', '#ff4589', '#ff85b3', '#ffffff', '#ffde59'];
+
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const isCircle = Math.random() > 0.5;
+                const startLeft = Math.random() * 100; // vw
+                const endX = (Math.random() - 0.5) * 200; // Random end position relative to center
+
+                // Style the confetti
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                confetti.style.backgroundColor = color;
+                confetti.style.left = startLeft + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.borderRadius = isCircle ? '50%' : '0';
+                confetti.style.setProperty('--endX', endX + 'px');
+
+                // Set animation
+                const duration = Math.random() * 2 + 2;
+                confetti.style.animation = `fallToCenter ${duration}s forwards`;
+
+                // Add to container
+                confettiContainer.appendChild(confetti);
+
+                // When animation ends, move to pile
+                setTimeout(() => {
+                    confetti.remove();
+
+                    // Create pile element
+                    const pileElement = document.createElement('div');
+                    pileElement.className = 'confetti-piece';
+                    pileElement.style.width = size + 'px';
+                    pileElement.style.height = size + 'px';
+                    pileElement.style.backgroundColor = color;
+                    pileElement.style.borderRadius = isCircle ? '50%' : '0';
+
+                    // Position in pile (randomly distributed at bottom center)
+                    const pileX = (Math.random() - 0.5) * confettiPile.offsetWidth * 0.8;
+                    const pileY = -Math.random() * 50;
+                    pileElement.style.transform = `translate(${pileX}px, ${pileY}px) rotate(${Math.random() * 360}deg)`;
+                    pileElement.style.position = 'absolute';
+                    pileElement.style.bottom = '0';
+                    pileElement.style.zIndex = Math.floor(Math.random() * 10);
+
+                    confettiPile.appendChild(pileElement);
+                }, duration * 1000);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createBalloons();
+            createHearts();
+            createStars();
+
+            // Add button event listener
+            document.getElementById('celebrateBtn').addEventListener('click', () => {
+                createConfetti();
+
+                // Play celebration sound
+                const audio = new Audio('https://freesound.org/data/previews/202/202029_2644491-lq.mp3');
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log('Audio playback failed:', e));
+            });
+        });
+    </script>
+</body>
+
+</html>
